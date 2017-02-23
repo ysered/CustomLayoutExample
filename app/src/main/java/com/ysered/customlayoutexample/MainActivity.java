@@ -4,10 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.ysered.customlayoutexample.view.MyLayout;
+import com.ysered.customlayoutexample.view.MyView;
+
 public class MainActivity extends AppCompatActivity {
+
+    private MyLayout myLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setTitle(null);
         }
+        myLayout = (MyLayout) findViewById(R.id.myLayout);
     }
 
     @Override
@@ -38,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addView() {
-
+        final MyView myView = new MyView(this);
+        myLayout.addView(myView);
     }
 }
