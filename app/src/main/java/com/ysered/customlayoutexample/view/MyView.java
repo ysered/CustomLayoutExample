@@ -23,12 +23,6 @@ public class MyView extends View {
         init(context);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        setMeasuredDimension(100, 100);
-    }
-
     private void init(Context context) {
         setBackgroundColor(ColorUtils.getRandomColor(context));
         setMeasuredDimension(100, 100);
