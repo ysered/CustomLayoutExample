@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CustomLayoutExample</string>
+    <string name="plus_one">Plus One</string>
 </resources>
