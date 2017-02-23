@@ -1,10 +1,9 @@
-package com.ysered.customlayoutexample.view;
+package com.ysered.customlayoutexample.view.util;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Build;
 import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
 
 import com.ysered.customlayoutexample.R;
 
@@ -39,7 +38,8 @@ public final class ColorUtils {
             R.color.color_blue_gray,
             R.color.color_black
     };
-    private static final Random random = new Random(COLORS.length);
+    private static final int MAX = COLORS.length;
+    private static final Random random = new Random();
 
     /**
      * Returns random color based on colors defined in resources.
@@ -49,12 +49,12 @@ public final class ColorUtils {
      */
     public static @ColorInt int getRandomColor(Context context) {
         final Resources resources = context.getResources();
-        final int colorRes = COLORS[random.nextInt()];
+        final int randomIndex = random.nextInt(MAX);
         int color;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = resources.getColor(colorRes, context.getTheme());
+            color = resources.getColor(COLORS[randomIndex], context.getTheme());
         } else {
-            color = resources.getColor(colorRes);
+            color = resources.getColor(COLORS[randomIndex]);
         }
         return color;
     }
