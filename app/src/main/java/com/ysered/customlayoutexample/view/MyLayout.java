@@ -39,11 +39,7 @@ public class MyLayout extends ViewGroup {
                     && child.getVisibility() != GONE) {
                 int width = child.getMeasuredWidth();
                 int height = child.getMeasuredHeight();
-                child.layout(point.x, point.y, width, height);
-                Log.d(TAG, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                Log.d(TAG, "x = " + point.x + ", y = " + point.y);
-                Log.d(TAG, "width = " + width + ", height = " + height);
-                Log.d(TAG, "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                child.layout(point.x, point.y, point.x + width, point.y + height);
             }
         }
     }
@@ -86,7 +82,7 @@ public class MyLayout extends ViewGroup {
     @Override
     public void addView(View child) {
         super.addView(child);
-        final Point point = new Point(random.nextInt(getWidth() / 2), random.nextInt(getHeight() / 2));
+        final Point point = new Point(random.nextInt(getWidth()), random.nextInt(getHeight()));
         randomPoints.put(getChildCount() - 1, point);
     }
 }
