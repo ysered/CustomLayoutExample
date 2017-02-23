@@ -45,41 +45,6 @@ public class MyLayout extends ViewGroup {
     }
 
     @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        final int desiredWidth = 1000;
-        final int desiredHeight = 1000;
-        // mode
-        final int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        final int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        // size
-        final int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        final int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
-        int width;
-        int height;
-
-        // width
-        if (widthMode == MeasureSpec.EXACTLY) {
-            width = widthSize;
-        } else if (widthMode == MeasureSpec.AT_MOST) {
-            width = Math.min(desiredWidth, widthSize);
-        } else {
-            width = desiredWidth;
-        }
-        // height
-        if (heightMode == MeasureSpec.EXACTLY) {
-            height = heightSize;
-        } else if (heightMode == MeasureSpec.AT_MOST) {
-            height = Math.min(desiredHeight, heightSize);
-        } else {
-            height = desiredHeight;
-        }
-        // set width and height
-        setMeasuredDimension(width, height);
-        Log.d(TAG, "setMeasuredDimension(" + width + ", " + height + ")");
-    }
-
-    @Override
     public void addView(View child) {
         super.addView(child);
         final Point point = new Point(random.nextInt(getWidth()), random.nextInt(getHeight()));
