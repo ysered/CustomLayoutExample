@@ -42,20 +42,28 @@ public final class ColorUtils {
     private static final Random random = new Random();
 
     /**
-     * Returns random color based on colors defined in resources.
+     * Returns random color from the predefined array based on color resources.
 
      * @param context
-     * @return
+     * @return return resolved color resource
      */
     public static @ColorInt int getRandomColor(Context context) {
-        final Resources resources = context.getResources();
         final int randomIndex = random.nextInt(MAX);
-        int color;
+        return getColor(context, COLORS[randomIndex]);
+    }
+
+    public static @ColorInt int getGrayColor(Context context) {
+        return getColor(context, R.color.color_gray);
+    }
+
+    private static @ColorInt int getColor(Context context, int color) {
+        final Resources resources = context.getResources();
+        int resolvedColor;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            color = resources.getColor(COLORS[randomIndex], context.getTheme());
+            resolvedColor = resources.getColor(color, context.getTheme());
         } else {
-            color = resources.getColor(COLORS[randomIndex]);
+            resolvedColor = resources.getColor(color);
         }
-        return color;
+        return resolvedColor;
     }
 }
