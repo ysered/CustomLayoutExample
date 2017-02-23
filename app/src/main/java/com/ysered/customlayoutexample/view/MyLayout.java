@@ -29,17 +29,13 @@ public class MyLayout extends ViewGroup {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        final int count = getChildCount();
-        for (int i = 0; i < count; i++) {
-            Point point = randomPoints.get(i);
-            View child = getChildAt(i);
-            if (point != null
-                    && child != null
-                    && child.getVisibility() != GONE) {
-                int width = child.getMeasuredWidth();
-                int height = child.getMeasuredHeight();
-                child.layout(point.x, point.y, point.x + width, point.y + height);
-            }
+        final int lastIndex = getChildCount() - 1;
+        final View child = getChildAt(lastIndex);
+        final Point point = randomPoints.get(lastIndex);
+        if (point != null && child != null) {
+            int width = child.getMeasuredWidth();
+            int height = child.getMeasuredHeight();
+            child.layout(point.x, point.y, point.x + width, point.y + height);
         }
     }
 
