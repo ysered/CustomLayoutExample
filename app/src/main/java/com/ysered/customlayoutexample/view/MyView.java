@@ -36,7 +36,7 @@ public class MyView extends View {
         setClickable(true);
 
         final int color = ColorUtils.getRandomColor(context);
-        final int pressedColor = ColorUtils.getGrayColor(context);
+        final int pressedColor = ColorUtils.getSelectedColor(context);
         final int[] pressedState = { android.R.attr.state_selected, android.R.attr.state_pressed };
 
         final StateListDrawable statesDrawable = new StateListDrawable();

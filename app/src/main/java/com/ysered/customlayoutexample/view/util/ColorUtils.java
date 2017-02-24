@@ -52,7 +52,7 @@ public final class ColorUtils {
         return getColor(context, COLORS[randomIndex]);
     }
 
-    public static @ColorInt int getGrayColor(Context context) {
+    public static @ColorInt int getSelectedColor(Context context) {
         return getColor(context, R.color.color_gray);
     }
 
