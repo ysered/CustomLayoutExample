@@ -3,7 +3,10 @@ package com.ysered.customlayoutexample.view;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -58,9 +61,14 @@ public class MyView extends View {
         final int height = (int) resources.getDimension(R.dimen.my_view_height);
         setMeasuredDimension(width, height);
 
+        final Drawable[] selectedStateLayers = {
+                new ColorDrawable(ColorUtils.getSelectedColor(context)),
+                ContextCompat.getDrawable(context, R.drawable.bg_my_view_selected)
+        };
+
         final StateListDrawable statesDrawable = new StateListDrawable();
         statesDrawable.addState(STATE_DEFAULT, new ColorDrawable(ColorUtils.getRandomColor(context)));
-        statesDrawable.addState(STATE_SELECTED, new ColorDrawable(ColorUtils.getSelectedColor(context)));
+        statesDrawable.addState(STATE_SELECTED, new LayerDrawable(selectedStateLayers));
         setBackground(statesDrawable);
 
         setOnTouchListener(new OnTouchListener() {
