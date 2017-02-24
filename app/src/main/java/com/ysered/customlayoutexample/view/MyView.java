@@ -1,6 +1,7 @@
 package com.ysered.customlayoutexample.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
@@ -52,7 +53,10 @@ public class MyView extends View {
     }
 
     private void init(Context context) {
-        setMeasuredDimension(140, 140);
+        final Resources resources = context.getResources();
+        final int width = (int) resources.getDimension(R.dimen.my_view_width);
+        final int height = (int) resources.getDimension(R.dimen.my_view_height);
+        setMeasuredDimension(width, height);
 
         setEnabled(true);
         setFocusable(true);
