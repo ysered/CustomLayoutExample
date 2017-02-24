@@ -1,49 +1,31 @@
 package com.ysered.customlayoutexample;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
 
-import com.ysered.customlayoutexample.view.MyLayout;
-import com.ysered.customlayoutexample.view.MyView;
-
-public class MainActivity extends AppCompatActivity {
-
-    private MyLayout myLayout;
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(null);
-        }
-        myLayout = (MyLayout) findViewById(R.id.myLayout);
+        findViewById(R.id.randomColorsButton).setOnClickListener(this);
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.itemPlusOne:
-                addView();
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.randomColorsButton:
+                intent = new Intent(this, RandomColorsActivity.class);
                 break;
             default:
-                return super.onOptionsItemSelected(item);
+                intent = null;
         }
-        return true;
-    }
-
-    private void addView() {
-        final MyView myView = new MyView(this);
-        myLayout.addView(myView);
+        if (intent != null) {
+            startActivity(intent);
+        }
     }
 }
