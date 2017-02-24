@@ -4,14 +4,19 @@ import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.util.StateSet;
+import android.view.MotionEvent;
 import android.view.View;
 
+import com.ysered.customlayoutexample.R;
 import com.ysered.customlayoutexample.view.util.ColorUtils;
 
 public class MyView extends View {
     private static final String TAG = MyView.class.getSimpleName();
+
+    private static final int[] STATE_DEFAULT = {R.attr.my_view_default};
+    private static final int[] STATE_SELECTED = {R.attr.my_view_selected};
+
+    private boolean isStateSelected = false;
 
     public MyView(Context context) {
         super(context);
@@ -28,6 +33,24 @@ public class MyView extends View {
         init(context);
     }
 
+    @Override
+    protected int[] onCreateDrawableState(int extraSpace) {
+        final int[] drawableState = super.onCreateDrawableState(extraSpace + 2);
+        if (isStateSelected) {
+            mergeDrawableStates(drawableState, STATE_SELECTED);
+        } else {
+            mergeDrawableStates(drawableState, STATE_DEFAULT);
+        }
+        return drawableState;
+    }
+
+    public void setSelected(boolean isSelected) {
+        if (this.isStateSelected != isSelected) {
+            this.isStateSelected = isSelected;
+            refreshDrawableState();
+        }
+    }
+
     private void init(Context context) {
         setMeasuredDimension(140, 140);
 
@@ -35,20 +58,26 @@ public class MyView extends View {
         setFocusable(true);
         setClickable(true);
 
-        final int color = ColorUtils.getRandomColor(context);
-        final int pressedColor = ColorUtils.getSelectedColor(context);
-        final int[] pressedState = { android.R.attr.state_selected, android.R.attr.state_pressed };
-
         final StateListDrawable statesDrawable = new StateListDrawable();
-        statesDrawable.addState(StateSet.WILD_CARD, new ColorDrawable(color));
-        statesDrawable.addState(pressedState, new ColorDrawable(pressedColor));
+        statesDrawable.addState(STATE_DEFAULT, new ColorDrawable(ColorUtils.getRandomColor(context)));
+        statesDrawable.addState(STATE_SELECTED, new ColorDrawable(ColorUtils.getSelectedColor(context)));
 
         setBackground(statesDrawable);
 
-        setOnClickListener(new OnClickListener() {
+        setOnTouchListener(new OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                Log.d(TAG, "onClick: clicked!!!");
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        setSelected(true);
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        setSelected(false);
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
             }
         });
     }

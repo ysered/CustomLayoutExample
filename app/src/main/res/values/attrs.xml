@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="my_view_state">
+        <attr name="my_view_default" format="boolean"/>
+        <attr name="my_view_selected" format="boolean"/>
+    </declare-styleable>
+</resources>
