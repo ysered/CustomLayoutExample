@@ -16,6 +16,7 @@ import com.ysered.customlayoutexample.view.util.ColorUtils;
 public class TagView extends FrameLayout {
 
     private TextView tagText;
+    private GradientDrawable backgroundShape;
 
     public TagView(Context context) {
         super(context);
@@ -34,10 +35,21 @@ public class TagView extends FrameLayout {
         applyAttributes(context, attrs);
     }
 
+    public void setTagText(String text) {
+        this.tagText.append(text);
+    }
+
+    public void setTagBackgroundColor(int color) {
+        final int backgroundColor = ColorUtils.getColor(getContext(), color);
+        backgroundShape.setColor(backgroundColor);
+        setBackground(backgroundShape);
+    }
+
     private void init(Context context) {
         final View view = inflate(context, R.layout.view_tag, this);
         tagText = (TextView) view.findViewById(R.id.tagText);
         tagText.setText("#");
+        backgroundShape = (GradientDrawable) ContextCompat.getDrawable(context, R.drawable.shape_view_tag);
     }
 
     private void applyAttributes(Context context, AttributeSet attrs) {
@@ -48,9 +60,8 @@ public class TagView extends FrameLayout {
         }
 
         final int backgroundColor = typedArray.getColor(R.styleable.TagView_tag_background, ColorUtils.getWhiteColor(context));
-        final GradientDrawable background = (GradientDrawable) ContextCompat.getDrawable(context, R.drawable.shape_view_tag);
-        background.setColor(backgroundColor);
-        setBackground(background);
+        backgroundShape.setColor(backgroundColor);
+        setBackground(backgroundShape);
         typedArray.recycle();
     }
 }

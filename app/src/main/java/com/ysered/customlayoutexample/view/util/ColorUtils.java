@@ -52,15 +52,14 @@ public final class ColorUtils {
         return getColor(context, COLORS[randomIndex]);
     }
 
-    public static @ColorInt int getSelectedColor(Context context) {
-        return getColor(context, R.color.color_gray);
-    }
-
-    public static @ColorInt int getWhiteColor(Context context) {
-        return getColor(context, R.color.color_white);
-    }
-
-    private static @ColorInt int getColor(Context context, int color) {
+    /**
+     * Returns resolved color by its ID.
+     *
+     * @param context
+     * @param color resource identifier
+     * @return resolved color identifier
+     */
+    public static @ColorInt int getColor(Context context, int color) {
         final Resources resources = context.getResources();
         int resolvedColor;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -69,5 +68,19 @@ public final class ColorUtils {
             resolvedColor = resources.getColor(color);
         }
         return resolvedColor;
+    }
+
+    /**
+     * Returns color to indicate active view state.
+     *
+     * @param context
+     * @return resolved color identifier
+     */
+    public static @ColorInt int getSelectedColor(Context context) {
+        return getColor(context, R.color.color_gray);
+    }
+
+    public static @ColorInt int getWhiteColor(Context context) {
+        return getColor(context, R.color.color_white);
     }
 }
