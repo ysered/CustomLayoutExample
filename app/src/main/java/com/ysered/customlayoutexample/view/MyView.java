@@ -17,7 +17,7 @@ public class MyView extends View {
     private static final int[] STATE_DEFAULT = {R.attr.my_view_default};
     private static final int[] STATE_SELECTED = {R.attr.my_view_selected};
 
-    private boolean isStateSelected = false;
+    private boolean isSelected = false;
 
     public MyView(Context context) {
         super(context);
@@ -37,7 +37,7 @@ public class MyView extends View {
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
         final int[] drawableState = super.onCreateDrawableState(extraSpace + 2);
-        if (isStateSelected) {
+        if (isSelected) {
             mergeDrawableStates(drawableState, STATE_SELECTED);
         } else {
             mergeDrawableStates(drawableState, STATE_DEFAULT);
@@ -46,8 +46,8 @@ public class MyView extends View {
     }
 
     public void setSelected(boolean isSelected) {
-        if (this.isStateSelected != isSelected) {
-            this.isStateSelected = isSelected;
+        if (this.isSelected != isSelected) {
+            this.isSelected = isSelected;
             refreshDrawableState();
         }
     }
@@ -58,14 +58,9 @@ public class MyView extends View {
         final int height = (int) resources.getDimension(R.dimen.my_view_height);
         setMeasuredDimension(width, height);
 
-        setEnabled(true);
-        setFocusable(true);
-        setClickable(true);
-
         final StateListDrawable statesDrawable = new StateListDrawable();
         statesDrawable.addState(STATE_DEFAULT, new ColorDrawable(ColorUtils.getRandomColor(context)));
         statesDrawable.addState(STATE_SELECTED, new ColorDrawable(ColorUtils.getSelectedColor(context)));
-
         setBackground(statesDrawable);
 
         setOnTouchListener(new OnTouchListener() {
