@@ -5,6 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 
 import com.ysered.customlayoutexample.view.MyLayout;
 import com.ysered.customlayoutexample.view.MyView;
@@ -22,6 +24,21 @@ public class RandomColorsActivity extends AppCompatActivity {
             actionBar.setTitle(null);
         }
         myLayout = (MyLayout) findViewById(R.id.myLayout);
+        myLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        final int x = (int) event.getX();
+                        final int y = (int) event.getY();
+                        addViewAtPosition(x, y);
+                        break;
+                    default:
+                        return false;
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -45,5 +62,10 @@ public class RandomColorsActivity extends AppCompatActivity {
     private void addView() {
         final MyView myView = new MyView(this);
         myLayout.addView(myView);
+    }
+
+    private void addViewAtPosition(int x, int y) {
+        final MyView myView = new MyView(this);
+        myLayout.addViewAtPosition(myView, x, y);
     }
 }

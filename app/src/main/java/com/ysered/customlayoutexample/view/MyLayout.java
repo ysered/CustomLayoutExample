@@ -41,8 +41,22 @@ public class MyLayout extends ViewGroup {
 
     @Override
     public void addView(View child) {
+        addNewView(child, random.nextInt(getWidth()), random.nextInt(getHeight()));
+    }
+
+    public void addViewAtPosition(View child, int x, int y) {
+        addNewView(child, x, y);
+    }
+
+    private void addNewView(View child, int x, int y) {
         super.addView(child);
-        final Point point = new Point(random.nextInt(getWidth()), random.nextInt(getHeight()));
+        final int centerX = x - (child.getMeasuredWidth() / 2);
+        final int centerY = y - (child.getMeasuredHeight() / 2);
+
+        final int xPos = centerX > 0 ? centerX : x;
+        final int yPos = centerY > 0 ? centerY : y;
+
+        final Point point = new Point(xPos, yPos);
         randomPoints.put(getChildCount() - 1, point);
     }
 }
