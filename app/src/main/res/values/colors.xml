@@ -23,5 +23,6 @@
     <color name="color_gray">#9E9E9E</color>
     <color name="color_blue_gray">#607D8B</color>
     <color name="color_black">#000000</color>
+    <color name="color_white">#FFFFFF</color>
     <color name="color_transparent">#00000000</color>
 </resources>

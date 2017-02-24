@@ -56,6 +56,10 @@ public final class ColorUtils {
         return getColor(context, R.color.color_gray);
     }
 
+    public static @ColorInt int getWhiteColor(Context context) {
+        return getColor(context, R.color.color_white);
+    }
+
     private static @ColorInt int getColor(Context context, int color) {
         final Resources resources = context.getResources();
         int resolvedColor;
