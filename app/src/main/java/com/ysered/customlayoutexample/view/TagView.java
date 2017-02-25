@@ -7,6 +7,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import com.ysered.customlayoutexample.R;
 import com.ysered.customlayoutexample.view.util.ColorUtils;
 
 public class TagView extends FrameLayout {
+    private static final String TAG = TagView.class.getSimpleName();
 
     private TextView tagText;
     private GradientDrawable backgroundShape;
@@ -50,6 +52,11 @@ public class TagView extends FrameLayout {
         tagText = (TextView) view.findViewById(R.id.tagText);
         tagText.setText("#");
         backgroundShape = (GradientDrawable) ContextCompat.getDrawable(context, R.drawable.shape_view_tag);
+        final FrameLayout.LayoutParams params = new LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        setLayoutParams(params);
     }
 
     private void applyAttributes(Context context, AttributeSet attrs) {
@@ -58,7 +65,6 @@ public class TagView extends FrameLayout {
         if (!TextUtils.isEmpty(tag)) {
             tagText.append(tag);
         }
-
         final int backgroundColor = typedArray.getColor(R.styleable.TagView_tag_background, ColorUtils.getWhiteColor(context));
         backgroundShape.setColor(backgroundColor);
         setBackground(backgroundShape);
