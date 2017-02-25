@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<com.ysered.customlayoutexample.view.TagLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:attrs="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/tagsContainer"
+    android:id="@+id/tagsLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/margin_default">
-
-    <com.ysered.customlayoutexample.view.TagView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        attrs:tag_background="@color/color_cyan"
-        attrs:tag_text="Hello, world!"/>
-
-</LinearLayout>
+    android:padding="@dimen/margin_default"
+    attrs:tag_space_horizontal="@dimen/tag_space_default"/>
