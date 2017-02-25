@@ -42,8 +42,7 @@ public class TagView extends FrameLayout {
     }
 
     public void setTagBackgroundColor(int color) {
-        final int backgroundColor = ColorUtils.getColor(getContext(), color);
-        backgroundShape.setColor(backgroundColor);
+        backgroundShape.setColor(color);
         setBackground(backgroundShape);
     }
 
