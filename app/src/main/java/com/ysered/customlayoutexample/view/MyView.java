@@ -23,13 +23,11 @@ public class MyView extends View {
     private boolean isSelected = false;
 
     public MyView(Context context) {
-        super(context);
-        init(context);
+        this(context, null);
     }
 
     public MyView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
+        this(context, attrs, 0);
     }
 
     public MyView(Context context, AttributeSet attrs, int defStyleAttr) {
